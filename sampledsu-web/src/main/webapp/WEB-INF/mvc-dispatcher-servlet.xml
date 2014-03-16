@@ -15,6 +15,10 @@
  
     <mvc:annotation-driven/>
     
+    <bean id="mongoURI" class="com.mongodb.MongoURI">
+      <constructor-arg value="${MONGOHQ_URL}"/>
+    </bean>
+    
 	<context:component-scan base-package="org.sampledsu.controller" />
 	<context:component-scan base-package="org.sampledsu.common.dao.mongo" />
 	<context:component-scan base-package="org.sampledsu.rest" />
@@ -28,7 +32,10 @@
 	<!--  mongodb://heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com:10006/app22831430 -->
 	 <!-- Factory bean that creates the Mongo instance -->
     <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+        <property name="uri" ref="mongoURI"/>
+        <!-- 
         <property name="host" value="heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com" />
+        -->
         <!--
         <property name="host" value="localhost"/>
         <property name="port" value="27017"/>
