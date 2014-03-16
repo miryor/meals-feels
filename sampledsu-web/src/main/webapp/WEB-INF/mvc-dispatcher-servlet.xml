@@ -21,14 +21,21 @@
       <constructor-arg value="${MONGOHQ_URL}"/>
     </bean>
     
+    <bean class="com.mongodb.Mongo" id="mongo">
+        <constructor-arg ref="mongoURI" />
+    </bean>
+    
     <!-- create db object by calling getDB on mongo bean -->
+    <!-- 
     <bean id="db" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
       <property name="targetObject"><ref local="mongoURI"/></property>
       <property name="targetMethod"><value>connectDB</value></property>
     </bean>
+    -->
     
     <!-- call authenticate on db object -->
-    <bean id="mongo"
+    <!-- 
+    <bean id="authenticateDB"
         class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject"><ref local="db" /></property>
         <property name="targetMethod">
@@ -41,6 +48,7 @@
             </list>
         </property>
     </bean>
+    -->
     
 	<context:component-scan base-package="org.sampledsu.controller" />
 	<context:component-scan base-package="org.sampledsu.common.dao.mongo" />
