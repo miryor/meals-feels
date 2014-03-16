@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 import org.sampledsu.common.models.*;
 import org.sampledsu.common.dao.mongo.MealRepository;
 
+/**
+ * Our mvc Service for handling Meal related actions.
+ * Expectation for a MealRepository to a exist.
+ * @author royrim
+ *
+ */
 @Service
 public class MealService {
 

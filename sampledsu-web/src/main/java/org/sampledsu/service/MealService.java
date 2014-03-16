@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import org.sampledsu.common.models.Meal;
 
+/**
+ * initial attempt at MealService, ignore for now
+ * @author royrim
+ *
+ */
 @Repository
 public class MealService {
     

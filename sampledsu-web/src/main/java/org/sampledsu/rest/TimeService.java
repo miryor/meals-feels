@@ -11,6 +11,11 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * leftover from sample app
+ * @author royrim
+ *
+ */
 @Component
 @Path("/time")
 @Produces(MediaType.APPLICATION_JSON)

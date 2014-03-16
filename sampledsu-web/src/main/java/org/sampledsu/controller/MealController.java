@@ -20,6 +20,12 @@ import org.slf4j.LoggerFactory;
 
 import java.security.Principal;
 
+/**
+ * Our spring mvc controller for Meals
+ * Expects a MealService to exist.
+ * @author royrim
+ *
+ */
 @Controller
 public class MealController {
 	private static Logger logger = LoggerFactory.getLogger( MealController.class );

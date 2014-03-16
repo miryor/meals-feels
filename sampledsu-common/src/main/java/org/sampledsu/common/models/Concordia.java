@@ -1,5 +1,12 @@
 package org.sampledsu.common.models;
 
+/**
+ * Represents parent Concordia schema
+ * Expectation is that Jersey will format this in JSON correctly
+ * please see com.sun.jersey.api.json.POJOMappingFeature
+ * @author royrim
+ *
+ */
 public class Concordia {
 	
 	public static String TYPE_OBJECT = "object";

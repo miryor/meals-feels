@@ -22,6 +22,11 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * REST Component to return our Meal information in DSU
+ * @author royrim
+ *
+ */
 @Component
 @Path("/omh/v1/omh:sampledsu:meal/1")
 @Produces(MediaType.APPLICATION_JSON)
@@ -39,18 +44,6 @@ public class OmhMeal {
 		List<Meal> meals = mealService.userMealList( name );
 		List<ConcordiaData<ConcordiaMeta,Meal>> list = new ArrayList<ConcordiaData<ConcordiaMeta,Meal>>();
 		for ( Meal meal : meals ) {
-			/*JSONObject json = new JSONObject();
-			try {
-				json.put( "user", meal.getUser() );
-				json.put( "entryDate", format.format( meal.getEntryDate().toDate() ) );
-				json.put( "mealType", meal.getMealType() );
-				json.put( "mealName", meal.getMealName() );
-				json.put( "containsGluten", meal.getContainsGluten() );
-				json.put( "brand", meal.getBrand() );
-			}
-			catch ( Exception e ) {
-				if ( logger.isErrorEnabled() ) logger.error( "Could not set json object values", e );
-			}*/
 			list.add( new ConcordiaData<ConcordiaMeta,Meal>( 
 					new ConcordiaMeta( meal.getId(), format.format( meal.getEntryDate().toDate() ) ),
 					meal

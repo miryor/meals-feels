@@ -14,7 +14,13 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
- 
+
+/**
+ * Meal POJO to represent a meal and how much gluten it had
+ * Includes annotations for spring data, right now specifically for mongo
+ * @author royrim
+ *
+ */
 @CompoundIndex(name = "user_entrydate_idx", def = "{'user' : 1, 'entryDate' : 1}")
 @Document
 public class Meal {

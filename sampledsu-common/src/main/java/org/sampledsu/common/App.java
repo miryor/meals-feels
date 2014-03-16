@@ -1,7 +1,7 @@
 package org.sampledsu.common;
 
 /**
- * Hello world!
+ * left over from sample app
  *
  */
 public class App 

@@ -4,6 +4,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * left over from sample app
+ * @author royrim
+ *
+ */
 @XmlRootElement
 public class Time {
 

@@ -1,5 +1,12 @@
 package org.sampledsu.common.models;
 
+/**
+ * Represents a field in Concordia schema
+ * Expectation is that Jersey will format this in JSON correctly
+ * please see com.sun.jersey.api.json.POJOMappingFeature
+ * @author royrim
+ *
+ */
 public class ConcordiaField {
 	private String name;
 	private String type;

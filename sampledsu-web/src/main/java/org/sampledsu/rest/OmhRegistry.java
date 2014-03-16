@@ -10,6 +10,13 @@ import org.sampledsu.common.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * REST calls to return our DSU registry.
+ * Would be better to use reflection to auto-generate the ConcordiaFields.
+ * Would also be nice to figure out a strategy for versioning.
+ * @author royrim
+ *
+ */
 @Component
 @Path("/omh/v1")
 @Produces(MediaType.APPLICATION_JSON)
