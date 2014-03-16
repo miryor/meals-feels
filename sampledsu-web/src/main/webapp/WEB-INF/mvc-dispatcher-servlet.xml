@@ -28,9 +28,12 @@
 	<!--  mongodb://heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com:10006/app22831430 -->
 	 <!-- Factory bean that creates the Mongo instance -->
     <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-        <!--  <property name="host" value="heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com" /> -->
+        <property name="host" value="heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com" />
+        <property name="port" value="10006"/>
+        <!--
         <property name="host" value="localhost"/>
         <property name="port" value="27017"/>
+        -->
     </bean>
     <!-- MongoTemplate for connecting and quering the documents in the database -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
