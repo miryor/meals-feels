@@ -53,7 +53,20 @@
             <artifactId>jersey-json</artifactId>
             <version>1.8</version>
         </dependency>
-
+        
+        <!-- JSP and JSTL SUPPORT -->
+		<dependency>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-jsp</artifactId>
+		  <version>${jetty.jsp.version}</version>
+		</dependency>    
+		<dependency>
+		  <groupId>javax.servlet</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+		  <scope>provided</scope>
+		</dependency>
+        
         <!-- jUnit -->
         <dependency>
             <groupId>junit</groupId>
@@ -106,6 +119,12 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.springframework.security.oauth</groupId>
+		    <artifactId>spring-security-oauth2</artifactId>
+		    <version>1.0.5.RELEASE</version>
+		</dependency>
+		
 		<!-- Jersey + Spring -->
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
@@ -134,6 +153,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+		
+		
 	</dependencies>
   <build>
     <finalName>sampledsu-rest</finalName>

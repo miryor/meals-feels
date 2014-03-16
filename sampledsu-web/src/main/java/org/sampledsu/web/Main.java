@@ -1,6 +1,10 @@
 package org.sampledsu.web;
 
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
@@ -32,7 +36,13 @@ public class Main {
 
         root.setContextPath("/");
         root.setDescriptor(webappDirLocation + "/WEB-INF/web.xml");
-        root.setResourceBase(webappDirLocation);
+        //root.setResourceBase(webappDirLocation);
+        
+        ResourceCollection resources = new ResourceCollection(new String[] {
+        		webappDirLocation,
+        		webappDirLocation + "/static"
+        });
+        root.setBaseResource(resources);
 
         // Parent loader priority is a class loader setting that Jetty accepts.
         // By default Jetty will behave like most web containers in that it will
@@ -41,6 +51,16 @@ public class Main {
         // Read more here: http://wiki.eclipse.org/Jetty/Reference/Jetty_Classloading
         root.setParentLoaderPriority(true);
 
+        /*ResourceHandler resource_handler = new ResourceHandler();
+        resource_handler.setDirectoriesListed(true);
+        resource_handler.setWelcomeFiles(new String[]{ "index.html" });
+        resource_handler.setResourceBase( webappDirLocation + "/static" );
+
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[] { resource_handler, root });
+        server.setHandler(handlers);
+        */
+        
         server.setHandler(root);
 
         server.start();
