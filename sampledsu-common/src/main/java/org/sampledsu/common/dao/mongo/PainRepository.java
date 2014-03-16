@@ -19,7 +19,7 @@ import org.sampledsu.common.models.*;
  *
  */
 @Repository
-public interface MealRepository extends MongoRepository<Meal,String> {
+public interface PainRepository extends MongoRepository<Pain,String> {
 
-	List<Meal> findByUser( String user, Sort sort/*, Pageable pageable*/ );
+	List<Pain> findByUser( String user, Sort sort/*, Pageable pageable*/ );
 }

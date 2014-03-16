@@ -127,22 +127,29 @@
 </div>
 
 <ul id="tab" class="nav nav-tabs">
-    <li class="active"><a id="meals-tab" href="#meals" data-toggle="tab">Meals</a></li>
+    <li class="active"><a id="meal-chart-tab" href="#chartmeal" data-toggle="tab">Chart</a></li>
+    <li><a id="meals-tab" href="#meals" data-toggle="tab">Meals</a></li>
     <li><a id="add-meal-tab" href="#addmeal" data-toggle="tab">Add Meal</a></li>
-    <li><a id="meal-chart-tab" href="#chartmeal" data-toggle="tab">Chart</a></li>
+    <li><a id="pains-tab" href="#pains" data-toggle="tab">Pain</a></li>
+    <li><a id="add-pain-tab" href="#addpain" data-toggle="tab">Add Pain</a></li>
 </ul>
 
 <div class="tab-content">
  
-<div id="meals" class="instructions tab-pane active">
+<div id="meals" class="tab-pane">
     <a name="meals"></a>
     
     <table border="1">
+    	<tr>
+    		<th>Date</th>
+    		<th>Meal Type</th>
+    		<th>Name</th>
+    		<th>Gluten</th>
+    		<th>Brand</th>
+    		<td></td>
+    	</tr>
         <c:forEach var="meal" items="${mealList}">
             <tr>
-                <td>${meal.user}</td>
-                <td>${meal.createdDate}</td>
-                <td>${meal.updateDate}</td>
                 <td class="entryDate">${meal.entryDate}</td>
                 <td>${meal.mealType}</td>
                 <td>${meal.mealName}</td>
@@ -177,10 +184,99 @@
         </form>
 </div>
 
-<div id="chartmeal" class="tab-pane">
+<div id="pains" class="tab-pane">
+    <a name="pains"></a>
+    
+    <table border="1">
+    	<tr>
+    		<th>Date</th>
+    		<th>Gas</th>
+    		<th>Bloating</th>
+    		<th>Abdominal</th>
+    		<th>Burning</th>
+    		<th>Headache</th>
+    		<th>Lethargy</th>
+    		<th>Joints</th>
+    	</tr>
+        <c:forEach var="pain" items="${painList}">
+            <tr>
+                <td class="painDateCell">${pain.entryDate}</td>
+                <td class="gasCell">${pain.gas}</td>
+                <td class="bloatingCell">${pain.bloating}</td>
+                <td class="abdominalCell">${pain.abdominal}</td>
+                <td class="burningCell">${pain.burning}</td>
+                <td class="headacheCell">${pain.headache}</td>
+                <td class="lethargyCell">${pain.lethargy}</td>
+                <td class="jointsCell">${pain.joints}</td>
+                <td><input type="button" value="delete" onclick="window.location='pain/delete?id=${pain.id}'"/></td>
+            </tr>
+        </c:forEach>
+    </table>  
+</div>
+
+<div id="addpain" class="tab-pane">
+	<a name="addpain"></a>
+    
+        <form action="pain/save" method="post">
+            <input type="hidden" name="id">
+            <label for="painEntryDate">Pain Date</label> <input type="text" id="painEntryDate" name="entryDate"/>
+            <label for="gas">Gas</label> <select id="gas" name="gas">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="bloating">Bloating</label> <select id="bloating" name="bloating">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="abdominal">Abdominal</label> <select id="abdominal" name="abdominal">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="burning">Burning</label> <select id="burning" name="burning">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="headache">Headache</label> <select id="headache" name="headache">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="lethargy">Lethargy</label> <select id="lethargy" name="lethargy">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <label for="joints">Joints</label> <select id="joints" name="joints">
+            	<option value="None">None</option>
+            	<option value="Sparse">Sparse</option>
+            	<option value="Some">Some</option>
+            	<option value="Definitely">Definitely</option>
+            	<option value="A Lot">A Lot</option>
+            	</select>
+            <input type="submit" value="Submit"/>
+        </form>
+</div>
+
+<div id="chartmeal" class="tab-pane active">
     <a name="chartmeal"></a>
-	<div id="legendcontainer" style="width:1100px;position:"></div>
-	<div id="placeholder" style="width:1100px;height:400px;"></div>
+	<div id="legendcontainer" style="width:760px;position:"></div>
+	<div id="placeholder" style="width:760px;height:400px;"></div>
 	<div id="legend" style="width:600px;height:300;"></div>
 </div>
 
@@ -236,26 +332,66 @@ function containsGlutenToNumber( containsGluten ) {
 	else if ( containsGluten == 'Some' ) return 2;
 	else if ( containsGluten == 'Definitely' ) return 3;
 	else if ( containsGluten == 'A Lot' ) return 4;
-	else return 5;
+	else { console.log( "not sure: " + containsGlute ); return 0; }
 }
+function painToNumber( pain ) {
+	console.log( pain );
+	if ( pain == 'None' ) return 0;
+	else if ( pain == 'Sparse' ) return 1;
+	else if ( pain == 'Some' ) return 2;
+	else if ( pain == 'Definitely' ) return 3;
+	else if ( pain == 'A Lot' ) return 4;
+	else { console.log( "not sure: " + pain ); return 0; }	
+}
+
+var entryDates = $(".entryDate").map(function() {
+    return $(this).text();
+}).get();
+var containsGlutens = $(".containsGlutenCell").map(function() {
+    return $(this).text();
+}).get();
+var mealDataSet = [];
+for ( var i = 0; i < entryDates.length; i++ ) {
+	mealDataSet.push( [ entryDateToJS( entryDates[i] ), containsGlutenToNumber( containsGlutens[i] ) ] );
+}
+
+var painEntryDates = $(".painDateCell").map(function() { return $(this).text(); }).get();
+var gas = $(".gasCell").map(function() { return $(this).text();	}).get();
+var burning = $(".burningCell").map(function() { return $(this).text();	}).get();
+var bloating = $(".bloatingCell").map(function() { return $(this).text();	}).get();
+var abdominal = $(".abdominalCell").map(function() { return $(this).text();	}).get();
+var headache = $(".headacheCell").map(function() { return $(this).text();	}).get();
+var lethargy = $(".lethargyCell").map(function() { return $(this).text();	}).get();
+var joints = $(".jointsCell").map(function() { return $(this).text();	}).get();
+var gasDataSet = [];
+var burningDataSet = [];
+var bloatingDataSet = [];
+var abdominalDataSet = [];
+var lethargyDataSet = [];
+var headacheDataSet = [];
+var jointsDataSet = [];
+for ( var i = 0; i < painEntryDates.length; i++ ) {
+	gasDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( gas[i] ) ] );
+	burningDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( burning[i] ) ] );
+	bloatingDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( bloating[i] ) ] );
+	abdominalDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( abdominal[i] ) ] );
+	lethargyDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( lethargy[i] ) ] );
+	headacheDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( headache[i] ) ] );
+	jointsDataSet.push( [ entryDateToJS( painEntryDates[i] ), painToNumber( joints[i] ) ] );
+}
+
+var hour = 60*60*1000;
 function plotByChoice(doAll) {
 	
-	var entryDates = $(".entryDate").map(function() {
-	    return $(this).text();
-	}).get();
-	var containsGlutens = $(".containsGlutenCell").map(function() {
-	    return $(this).text();
-	}).get();
-	var mealDataSet = [];
-	for ( var i = 0; i < entryDates.length; i++ ) {
-		mealDataSet.push( [ entryDateToJS( entryDates[i] ), containsGlutenToNumber( containsGlutens[i] ) ] );
-	}
-	
 var datasets ={
-	"Meals" :{
-	  label : "Meals",
-	  data: mealDataSet
-	},
+	"Meals" :{ label : "Meals", data: mealDataSet },
+	"Gas" :{ label : "Gas", data: gasDataSet, bars: { show: true, barWidth: hour } },
+	"Burning" :{ label : "Burning", data: burningDataSet, bars: { show: true, barWidth: hour } },
+	"Bloating" :{ label : "Bloating", data: bloatingDataSet, bars: { show: true, barWidth: hour } },
+	"Abdominal" :{ label : "Abdominal", data: abdominalDataSet, bars: { show: true, barWidth: hour } },
+	"Headache" :{ label : "Headache", data: headacheDataSet, bars: { show: true, barWidth: hour } },
+	"Lethargy" :{ label : "Lethargy", data: lethargyDataSet, bars: { show: true, barWidth: hour } },
+	"Joints" :{ label : "Joint Ache", data: jointsDataSet, bars: { show: true, barWidth: hour } },
 };
 	
 data = [];
@@ -267,18 +403,11 @@ if (doAll != null)
 }   
 else
 {
-    $('#legend .legendCB').each(
-        function(){
-            if (this.checked)
-            {         
-                 data.push(datasets[this.id]);
-            }
-            else
-            {
-                 data.push({label: this.id, data: []})
-            }        
-        }
-    );
+    $('#legend .legendCB').each( function() {
+    	console.log( this.id );
+		if (this.checked) data.push(datasets[this.id]);
+		else data.push({label: this.id, data: []});
+    } );
 }        
 
 $.plot($("#placeholder"), data, { 
@@ -316,6 +445,7 @@ plotByChoice(this);
 
 $(function() {
 	$( "#entryDate" ).datetimepicker( { format: 'm/d/Y H:i'} );
+	$( "#painEntryDate" ).datetimepicker( { format: 'm/d/Y H:i'} );
 });
 </script>
 </body>
