@@ -14,6 +14,7 @@
 		http://www.springframework.org/schema/data/mongo/spring-mongo-1.3.xsd">
  
     <mvc:annotation-driven/>
+    <context:property-placeholder/>
     
     <bean id="mongoURI" class="com.mongodb.MongoURI">
       <constructor-arg value="${MONGOHQ_URL}"/>
