@@ -14,48 +14,6 @@
 		http://www.springframework.org/schema/data/mongo/spring-mongo-1.3.xsd">
  
     <mvc:annotation-driven/>
-    <context:annotation-config/>
-    <context:property-placeholder/>
-
-    <!-- 
-    <bean id="mongoURI" class="com.mongodb.MongoURI">
-      <constructor-arg value="${MONGOHQ_URL}"/>
-    </bean>
-    
-    <bean class="com.mongodb.Mongo" id="mongo">
-        <constructor-arg ref="mongoURI" />
-    </bean>
-    
-    <bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
-        <property name="username" value="#{mongoURI.username}" />
-        <property name="password" value="#{new java.lang.String(mongoURI.password)}" />
-    </bean>
-    -->
-        
-    <!-- create db object by calling getDB on mongo bean -->
-    <!-- 
-    <bean id="db" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-      <property name="targetObject"><ref local="mongoURI"/></property>
-      <property name="targetMethod"><value>connectDB</value></property>
-    </bean>
-    -->
-    
-    <!-- call authenticate on db object -->
-    <!-- 
-    <bean id="authenticateDB"
-        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject"><ref local="db" /></property>
-        <property name="targetMethod">
-            <value>authenticate</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>#{ @mongoURI.getUsername() }</value>
-                <value>#{ @mongoURI.getPassword() }</value>
-            </list>
-        </property>
-    </bean>
-    -->
     
 	<context:component-scan base-package="org.sampledsu.controller" />
 	<context:component-scan base-package="org.sampledsu.common.dao.mongo" />
@@ -69,14 +27,16 @@
 		
 	<!--  mongodb://heroku:Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng@oceanic.mongohq.com:10006/app22831430 -->
 	<!-- Factory bean that creates the Mongo instance -->
-	<!-- 
     <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+        <property name="host" value="oceanic.mongohq.com"/>
+        <property name="port" value="10006"/>
+        <property name="username" value="heroku"/>
+        <property name="password" value="Kwg9HopQzKAPMXWmrrgY9zbyA0f3qkzGgkkeGKFXwRDJoCr3NYPnR0ki_9Rg4oMe8h7me8iOD7vjlXZSCo72Ng"/>
+        <!--
         <property name="host" value="localhost"/>
         <property name="port" value="27017"/>
+        -->
     </bean>
-    -->
-    
-    <mongo:db-factory id="mongo" uri="${MONGOHQ_URL}"/>
     
     <!-- MongoTemplate for connecting and quering the documents in the database -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
