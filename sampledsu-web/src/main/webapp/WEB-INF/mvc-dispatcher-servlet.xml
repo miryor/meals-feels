@@ -16,7 +16,8 @@
     <mvc:annotation-driven/>
     <context:annotation-config/>
     <context:property-placeholder/>
-    
+
+    <!-- 
     <bean id="mongoURI" class="com.mongodb.MongoURI">
       <constructor-arg value="${MONGOHQ_URL}"/>
     </bean>
@@ -25,6 +26,12 @@
         <constructor-arg ref="mongoURI" />
     </bean>
     
+    <bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
+        <property name="username" value="#{mongoURI.username}" />
+        <property name="password" value="#{new java.lang.String(mongoURI.password)}" />
+    </bean>
+    -->
+        
     <!-- create db object by calling getDB on mongo bean -->
     <!-- 
     <bean id="db" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -68,6 +75,8 @@
         <property name="port" value="27017"/>
     </bean>
     -->
+    
+    <mongo:db-factory id="mongo" uri="${MONGOHQ_URL}"/>
     
     <!-- MongoTemplate for connecting and quering the documents in the database -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
