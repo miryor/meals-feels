@@ -309,15 +309,6 @@ $('#legend .legendCB').click(function(){
 //Setup labels for use on the Y-axis  
 var tickLabels = [[0, 'None'], [1, 'Maybe'], [2, 'Some'], [3, 'Definitely'], [4, 'A Lot']];  
 
-var DataSet1 = [ 
-             [1356998400000, 2.4],
-            [1357084800000, 3.4 ],
-            [1357171200000, 4.5 ],
-            [1357257600000, 5 ],
-            [1357344000000,  5],
-           
-];
-
 var firstTime =true;
 
 function entryDateToJS( entryDate ) {
@@ -384,14 +375,14 @@ var hour = 60*60*1000;
 function plotByChoice(doAll) {
 	
 var datasets ={
-	"Meals" :{ label : "Meals", data: mealDataSet },
-	"Gas" :{ label : "Gas", data: gasDataSet, bars: { show: true, barWidth: hour } },
-	"Burning" :{ label : "Burning", data: burningDataSet, bars: { show: true, barWidth: hour } },
-	"Bloating" :{ label : "Bloating", data: bloatingDataSet, bars: { show: true, barWidth: hour } },
-	"Abdominal" :{ label : "Abdominal", data: abdominalDataSet, bars: { show: true, barWidth: hour } },
-	"Headache" :{ label : "Headache", data: headacheDataSet, bars: { show: true, barWidth: hour } },
-	"Lethargy" :{ label : "Lethargy", data: lethargyDataSet, bars: { show: true, barWidth: hour } },
-	"Joints" :{ label : "Joint Ache", data: jointsDataSet, bars: { show: true, barWidth: hour } },
+	"Meals" :{ label : "Meals", data: mealDataSet, lines: { show: true }, points: { show: true } },
+	"Gas" :{ label : "Gas", data: gasDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Burning" :{ label : "Burning", data: burningDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Bloating" :{ label : "Bloating", data: bloatingDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Abdominal" :{ label : "Abdominal", data: abdominalDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Headache" :{ label : "Headache", data: headacheDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Lethargy" :{ label : "Lethargy", data: lethargyDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
+	"Joints" :{ label : "Joint Ache", data: jointsDataSet, lines: { show: false }, bars: { show: true, barWidth: hour } },
 };
 	
 data = [];
@@ -434,12 +425,54 @@ $.plot($("#placeholder"), data, {
 	        cb += label;
 	        return cb;
 	    }
-	}
+	},
+    grid: {
+        hoverable: true
+    }
 });
 $('#legend').find("input").click(function(){setTimeout(plotByChoice,100);});
 // $('#legend .legendCB').change(function(){setTimeout(plotByChoice,1000);});
-
 }
+
+function showTooltip(x, y, contents) {
+    $('<div id="tooltip">' + contents + '</div>').css({
+        position: 'absolute',
+        display: 'none',
+        top: y + 5,
+        left: x + 5,
+        border: '1px solid #fdd',
+        padding: '2px',
+        'background-color': '#fee',
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
+}
+
+var previousPoint = null;
+$("#placeholder").bind("plothover", function(event, pos, item) {
+    $("#x").text(pos.x.toFixed(2));
+    $("#y").text(pos.y.toFixed(2));
+
+    if (item) {
+        if (previousPoint != item.datapoint) {
+            previousPoint = item.datapoint;
+
+            $("#tooltip").remove();
+            var x = item.datapoint[0].toFixed(2),
+                y = item.datapoint[1].toFixed(2),
+                //set default content for tooltip
+                content = item.series.label + " of " + x + " = " + y;
+            
+            //now show tooltip
+            showTooltip(item.pageX, item.pageY, content);
+        }
+    }
+    else {
+        $("#tooltip").remove();
+        previousPoint = null;
+    }
+
+});
+
 
 plotByChoice(this);
 

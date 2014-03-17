@@ -6,7 +6,4 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.2.xsd">
  
-        <bean id="transactionBo" 
-                  class="org.sampledsu.common.transaction.impl.TransactionBoImpl" />
- 
 </beans>
